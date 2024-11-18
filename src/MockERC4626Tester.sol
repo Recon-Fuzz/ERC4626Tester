@@ -13,7 +13,11 @@ contract MockERC4626Tester is ERC4626 {
         DEPOSIT,
         MINT,
         WITHDRAW,
-        REDEEM
+        REDEEM,
+        PREVIEW_DEPOSIT,
+        PREVIEW_MINT,
+        PREVIEW_WITHDRAW,
+        PREVIEW_REDEEM
     }
 
     enum RevertType {
@@ -65,24 +69,52 @@ contract MockERC4626Tester is ERC4626 {
         _mint(to, amount);
     }
 
+    /// @dev Deposit assets, reverts as specified
     function deposit(uint256 assets, address receiver) public override returns (uint256) {
         _performRevertBehaviour(revertBehaviours[FunctionType.DEPOSIT]);
         return super.deposit(assets, receiver);
     }
 
+    /// @dev Mint shares, reverts as specified
     function mint(uint256 shares, address receiver) public override returns (uint256) {
         _performRevertBehaviour(revertBehaviours[FunctionType.MINT]);
         return super.mint(shares, receiver);
     }
 
+    /// @dev Withdraw assets, reverts as specified
     function withdraw(uint256 assets, address receiver, address owner) public override returns (uint256) {
         _performRevertBehaviour(revertBehaviours[FunctionType.WITHDRAW]);
         return super.withdraw(assets, receiver, owner);
     }
 
+    /// @dev Redeem shares, reverts as specified
     function redeem(uint256 shares, address receiver, address owner) public override returns (uint256) {
         _performRevertBehaviour(revertBehaviours[FunctionType.REDEEM]);
         return super.redeem(shares, receiver, owner);
+    }
+
+    /// @dev Preview deposit, reverts as specified
+    function previewDeposit(uint256 assets) public view override returns (uint256) {
+        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_DEPOSIT]);
+        return super.previewDeposit(assets);
+    }
+
+    /// @dev Preview mint, reverts as specified
+    function previewMint(uint256 shares) public view override returns (uint256) {
+        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_MINT]);
+        return super.previewMint(shares);
+    }
+
+    /// @dev Preview withdraw, reverts as specified
+    function previewWithdraw(uint256 assets) public view override returns (uint256) {
+        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_WITHDRAW]);
+        return super.previewWithdraw(assets);
+    }
+
+    /// @dev Preview redeem, reverts as specified
+    function previewRedeem(uint256 shares) public view override returns (uint256) {
+        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_REDEEM]);
+        return super.previewRedeem(shares);
     }
 
     /// @dev Revert in different ways to test the revert behaviour
