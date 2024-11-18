@@ -1,66 +1,25 @@
-## Foundry
+# ERC4626 Testing Utilities
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Introduction
 
-Foundry consists of:
+This repository contains testing utilities for ERC4626 vaults, including mocks that can simulate various failure modes and yield scenarios.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Overview
 
-## Documentation
+The main components are:
 
-https://book.getfoundry.sh/
+- `MockERC4626Tester`: A mock ERC4626 vault that can:
+  - Simulate different types of reverts (normal revert, out-of-gas, return bomb, etc.)
+  - Manipulate yield by increasing/decreasing the asset/share ratio
+  - Mint unbacked shares
+  - Configure decimals offset
+
+- `MockERC20Tester`: A mock ERC20 token for testing the vault with.
 
 ## Usage
 
-### Build
+To use these utilities in your project, you use Foundry to install them as dependencies:
 
-```shell
-$ forge build
-```
-
-### Test
-
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+```bash
+forge install
 ```
