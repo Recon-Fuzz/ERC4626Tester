@@ -26,20 +26,20 @@ abstract contract InitialState is Test {
 contract InitialStateTest is InitialState {
 
     function test_previewDepositRevertsAsSet() public {
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_DEPOSIT, MockERC4626Tester.RevertType.THROW);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.DEPOSIT, MockERC4626Tester.RevertType.THROW);
         vm.expectRevert();
         vault.previewDeposit(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_DEPOSIT, MockERC4626Tester.RevertType.OOG);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.DEPOSIT, MockERC4626Tester.RevertType.OOG);
         vm.expectRevert();
         vault.previewDeposit(depositAmount);
 
 // TODO: Doesn't revert
-//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_DEPOSIT, MockERC4626Tester.RevertType.RETURN_BOMB);
+//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.DEPOSIT, MockERC4626Tester.RevertType.RETURN_BOMB);
 //        vm.expectRevert();
 //        vault.deposit(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_DEPOSIT, MockERC4626Tester.RevertType.REVERT_BOMB);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.DEPOSIT, MockERC4626Tester.RevertType.REVERT_BOMB);
         vm.expectRevert();
         vault.previewDeposit(depositAmount);
     }
@@ -75,20 +75,20 @@ contract InitialStateTest is InitialState {
     }
 
     function test_previewMintRevertsAsSet() public {
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_MINT, MockERC4626Tester.RevertType.THROW);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.MINT, MockERC4626Tester.RevertType.THROW);
         vm.expectRevert();
         vault.previewMint(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_MINT, MockERC4626Tester.RevertType.OOG);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.MINT, MockERC4626Tester.RevertType.OOG);
         vm.expectRevert();
         vault.previewMint(depositAmount);
 
 // TODO: Doesn't revert
-//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_MINT, MockERC4626Tester.RevertType.RETURN_BOMB);
+//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.MINT, MockERC4626Tester.RevertType.RETURN_BOMB);
 //        vm.expectRevert();
 //        vault.mint(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_MINT, MockERC4626Tester.RevertType.REVERT_BOMB);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.MINT, MockERC4626Tester.RevertType.REVERT_BOMB);
         vm.expectRevert();
         vault.previewMint(depositAmount);
     }
@@ -134,20 +134,20 @@ abstract contract WithSupply is InitialState {
 contract WithSupplyTest is WithSupply {
 
     function test_previewWithdrawRevertsAsSet() public {
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_WITHDRAW, MockERC4626Tester.RevertType.THROW);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.WITHDRAW, MockERC4626Tester.RevertType.THROW);
         vm.expectRevert();
         vault.previewWithdraw(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_WITHDRAW, MockERC4626Tester.RevertType.OOG);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.WITHDRAW, MockERC4626Tester.RevertType.OOG);
         vm.expectRevert();
         vault.previewWithdraw(depositAmount);
 
 // TODO: Doesn't revert
-//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_WITHDRAW, MockERC4626Tester.RevertType.RETURN_BOMB);
+//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.WITHDRAW, MockERC4626Tester.RevertType.RETURN_BOMB);
 //        vm.expectRevert();
 //        vault.withdraw(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_WITHDRAW, MockERC4626Tester.RevertType.REVERT_BOMB);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.WITHDRAW, MockERC4626Tester.RevertType.REVERT_BOMB);
         vm.expectRevert();
         vault.previewWithdraw(depositAmount);
     }
@@ -182,20 +182,20 @@ contract WithSupplyTest is WithSupply {
     }
 
     function test_previewRedeemRevertsAsSet() public {
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_REDEEM, MockERC4626Tester.RevertType.THROW);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.REDEEM, MockERC4626Tester.RevertType.THROW);
         vm.expectRevert();
         vault.previewRedeem(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_REDEEM, MockERC4626Tester.RevertType.OOG);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.REDEEM, MockERC4626Tester.RevertType.OOG);
         vm.expectRevert();
         vault.previewRedeem(depositAmount);
 
 // TODO: Doesn't revert
-//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_REDEEM, MockERC4626Tester.RevertType.RETURN_BOMB);
+//        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.REDEEM, MockERC4626Tester.RevertType.RETURN_BOMB);
 //        vm.expectRevert();
 //        vault.redeem(depositAmount);
 
-        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.PREVIEW_REDEEM, MockERC4626Tester.RevertType.REVERT_BOMB);
+        vault.setRevertBehaviour(MockERC4626Tester.FunctionType.REDEEM, MockERC4626Tester.RevertType.REVERT_BOMB);
         vm.expectRevert();
         vault.previewRedeem(depositAmount);
     }

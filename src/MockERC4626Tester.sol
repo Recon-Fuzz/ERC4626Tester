@@ -13,11 +13,7 @@ contract MockERC4626Tester is ERC4626 {
         DEPOSIT,
         MINT,
         WITHDRAW,
-        REDEEM,
-        PREVIEW_DEPOSIT,
-        PREVIEW_MINT,
-        PREVIEW_WITHDRAW,
-        PREVIEW_REDEEM
+        REDEEM
     }
 
     enum RevertType {
@@ -95,25 +91,25 @@ contract MockERC4626Tester is ERC4626 {
 
     /// @dev Preview deposit, reverts as specified
     function previewDeposit(uint256 assets) public view override returns (uint256) {
-        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_DEPOSIT]);
+        _performRevertBehaviour(revertBehaviours[FunctionType.DEPOSIT]);
         return super.previewDeposit(assets);
     }
 
     /// @dev Preview mint, reverts as specified
     function previewMint(uint256 shares) public view override returns (uint256) {
-        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_MINT]);
+        _performRevertBehaviour(revertBehaviours[FunctionType.MINT]);
         return super.previewMint(shares);
     }
 
     /// @dev Preview withdraw, reverts as specified
     function previewWithdraw(uint256 assets) public view override returns (uint256) {
-        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_WITHDRAW]);
+        _performRevertBehaviour(revertBehaviours[FunctionType.WITHDRAW]);
         return super.previewWithdraw(assets);
     }
 
     /// @dev Preview redeem, reverts as specified
     function previewRedeem(uint256 shares) public view override returns (uint256) {
-        _performRevertBehaviour(revertBehaviours[FunctionType.PREVIEW_REDEEM]);
+        _performRevertBehaviour(revertBehaviours[FunctionType.REDEEM]);
         return super.previewRedeem(shares);
     }
 
