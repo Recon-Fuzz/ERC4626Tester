@@ -24,7 +24,7 @@ contract MockERC4626Tester is ERC4626 {
         REVERT_BOMB
     }
 
-    mapping(FunctionType => RevertType) revertBehaviours;
+    mapping(FunctionType => RevertType) public revertBehaviours;
 
     uint8 public decimalsOffset;
 
@@ -47,14 +47,17 @@ contract MockERC4626Tester is ERC4626 {
         revertBehaviours[ft] = rt;
     }
 
-    /// @dev Increase the yield by a given percentage by taking assets from the caller
+    /// @dev Increase the yield by a given percentage by taking assets from the caller.
     function increaseYield(uint256 increasePercentageFP4) public {
-        transferFrom(msg.sender, address(this), totalAssets() * increasePercentageFP4 / 1e4);
+        IERC20(asset()).transferFrom(msg.sender, address(this), totalAssets() * increasePercentageFP4 / 1e4);
     }
 
-    /// @dev Decrease the yield by a given percentage by minting unbacked shares to the caller
+    /// @dev Decrease the yield by a given percentage by minting unbacked shares to the caller.
     function decreaseYield(uint256 decreasePercentageFP4) public {
-        _mint(msg.sender, totalAssets() * decreasePercentageFP4 / 1e4);
+        // x = a/r' - s
+        uint256 targetRatio = 1e4 - decreasePercentageFP4;
+        uint256 newShares = totalAssets() * 1e4 / targetRatio - totalSupply();
+        _mint(msg.sender, newShares);
     }
 
     /// @dev Mint unbacked shares

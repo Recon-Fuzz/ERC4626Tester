@@ -136,19 +136,19 @@ contract WithSupplyTest is WithSupply {
         assertEq(vault.totalAssets(), 0);
     }
 
-    function test_increaseYield() public {
+    function test_increaseYield_Debug() public {
         uint256 ratioBefore = vault.convertToAssets(assetUnit);
         vault.increaseYield(100); // 1%
         uint256 ratioAfter = vault.convertToAssets(assetUnit);
 
-        assertEq(ratioAfter, ratioBefore * 101 / 100);
+        assertApproxEqRel(ratioAfter, ratioBefore * 101 / 100, 1); // Allow rounding errors in the ratio
     }
 
-    function test_decreaseYield() public {
+    function test_decreaseYield_Debug() public {
         uint256 ratioBefore = vault.convertToAssets(assetUnit);
         vault.decreaseYield(100); // 1%
         uint256 ratioAfter = vault.convertToAssets(assetUnit);
 
-        assertEq(ratioAfter, ratioBefore * 99 / 100);
+        assertApproxEqRel(ratioAfter, ratioBefore * 99 / 100, 1); // Allow rounding errors in the ratio
     }
 }
